@@ -7,7 +7,7 @@ CREATE TABLE "User" (
     username VARCHAR(30),
     password VARCHAR(30),
     first_name VARCHAR(30),
-    last_name VARCHAR(30),
+    last_name VARCHAR(30)
 );
 
 CREATE TABLE CreditCard (
