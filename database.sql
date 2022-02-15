@@ -1,7 +1,3 @@
-
-
-CREATE DATABASE geektext;
-
 CREATE TABLE "User" (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(30),
