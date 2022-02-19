@@ -16,3 +16,23 @@ CREATE TABLE CreditCard (
     expiration_date VARCHAR(5),
 	card_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE
 );
+
+CREATE TABLE Book (
+    ISBN INT PRIMARY KEY,
+    authorID INT REFERENCES Author (authorKey),
+    firstName VARCHAR,
+    lastName VARCHAR,
+    publisher VARCHAR,
+    biography VARCHAR,
+);
+
+CREATE TABLE Author (
+    authorKey INT PRIMARY KEY,
+    bookName VARCHAR,
+    bookDescription VARCHAR,
+    bookPrice INT,
+    bookGenre VARCHAR,
+    bookPublisher VARCHAR,
+    yearPublished INT
+    copiesSold INT,
+);
