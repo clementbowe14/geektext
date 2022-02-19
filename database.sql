@@ -16,3 +16,9 @@ CREATE TABLE CreditCard (
     expiration_date VARCHAR(5),
 	card_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE
 );
+
+CREATE TABLE Wishlist (
+    wishlist_id SERIAL PRIMARY KEY,
+    user_id Serial REFERENCES "User"(user_id) NOT NULL,
+    ISBN INT[] REFERENCES Book(ISBN) NOT NULL
+)
