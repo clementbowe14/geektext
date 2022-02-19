@@ -36,3 +36,10 @@ CREATE TABLE Author (
     yearPublished INT
     copiesSold INT,
 );
+
+CREATE TABLE Wishlist (
+    wishlist_id SERIAL PRIMARY KEY,
+    user_id Serial REFERENCES "User"(user_id) NOT NULL,
+    ISBN INT[] REFERENCES Book(ISBN) NOT NULL
+)
+
