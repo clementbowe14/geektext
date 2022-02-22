@@ -47,3 +47,13 @@ CREATE TABLE ReviewedBooks(
  	review_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE,
 	review_ISBN Serial REFERENCES "Book"(ISBN) ON DELETE CASCADE
 );
+
+CREATE TABLE ShoppingCart (
+    cart_id INT PRIMARY KEY,
+    user_id Serial REFERENCES "User"(user_id) NOT NULL,
+    ISBN Serial REFERENCES "Book"(ISBN) ON DELETE CASCADE, 
+    quantity INT NOT NULL,
+    price INT,
+    created_date date
+
+);
