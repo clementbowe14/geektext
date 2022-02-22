@@ -16,14 +16,6 @@ CREATE TABLE CreditCard (
 CREATE TABLE Book (
     ISBN INT PRIMARY KEY,
     authorID INT REFERENCES Author (authorKey),
-    firstName VARCHAR,
-    lastName VARCHAR,
-    publisher VARCHAR,
-    biography VARCHAR,
-);
-
-CREATE TABLE Author (
-    authorKey INT PRIMARY KEY,
     bookName VARCHAR,
     bookDescription VARCHAR,
     bookPrice INT,
@@ -31,6 +23,14 @@ CREATE TABLE Author (
     bookPublisher VARCHAR,
     yearPublished INT
     copiesSold INT,
+);
+
+CREATE TABLE Author (
+    authorKey INT PRIMARY KEY,
+    firstName VARCHAR,
+    lastName VARCHAR,
+    publisher VARCHAR,
+    biography VARCHAR,
 );
 
 CREATE TABLE Wishlist (
