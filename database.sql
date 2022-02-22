@@ -1,7 +1,3 @@
-
-
-CREATE DATABASE geektext;
-
 CREATE TABLE "User" (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(30),
@@ -41,5 +37,13 @@ CREATE TABLE Wishlist (
     wishlist_id SERIAL PRIMARY KEY,
     user_id Serial REFERENCES "User"(user_id) NOT NULL,
     ISBN INT[] REFERENCES Book(ISBN) NOT NULL
-)
+);
 
+CREATE TABLE ReviewedBooks(
+    review_id integer SERIAL PRIMARY KEY,
+    rating_score integer,
+    date_stamp date,
+    review_text VARCHAR,
+ 	review_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE,
+	review_ISBN Serial REFERENCES "Book"(ISBN) ON DELETE CASCADE
+);
