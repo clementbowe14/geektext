@@ -14,7 +14,6 @@ CREATE TABLE CreditCard (
 	card_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE
 );
 
-
 CREATE TABLE Author (
     authorKey INT PRIMARY KEY,
     firstName VARCHAR,
