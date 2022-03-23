@@ -51,6 +51,18 @@ app.get('/book/copiessold', (req, res) => {
 	pool.end;
 })
 
+//retrieves books from database 10 rows at a time
+app.get('/book/:pagenum', (req, res) => {
+	pool.query(`Select * from book limit 10 offset'${(req.params.pagenum * 10) - 10}'`, (err, result) => {
+		if (!err) {
+			res.send(result.rows);
+		}
+		else {
+			res.send(err);
+		}
+	});
+	pool.end;
+})
 
 app.listen(3000, () => {
     console.log("server is listening on port 3000");
