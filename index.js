@@ -38,6 +38,20 @@ app.get('/book/genre/:bookgenre', (req, res) => {
 	pool.end;
 })
 
+//sorts books in database by top 10 best sellers
+app.get('/book/copiessold', (req, res) => {
+	pool.query(`Select * from book order by copiessold desc limit 10`, (err, result) => {
+		if (!err) {
+			res.send(result.rows);
+		}
+		else {
+			res.send(err);
+		}
+	});
+	pool.end;
+})
+
+
 app.listen(3000, () => {
     console.log("server is listening on port 3000");
 })
