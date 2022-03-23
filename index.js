@@ -25,6 +25,18 @@ app.post("/user", async(req, res) => {
     res.sendStatus(200)
 });
 
+//filters books in database by user chosen genre
+app.get('/book/genre/:bookgenre', (req, res) => {
+	client.query(`Select * from book where bookgenre='${req.params.bookgenre}'`, (err, result) => {
+		if (!err) {
+			res.send(result.rows);
+		}
+		else {
+			res.send(err);
+		}
+	});
+	client.end;
+})
 
 app.listen(3000, () => {
     console.log("server is listening on port 3000");
