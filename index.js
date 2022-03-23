@@ -27,7 +27,7 @@ app.post("/user", async(req, res) => {
 
 //filters books in database by user chosen genre
 app.get('/book/genre/:bookgenre', (req, res) => {
-	client.query(`Select * from book where bookgenre='${req.params.bookgenre}'`, (err, result) => {
+	pool.query(`Select * from book where bookgenre='${req.params.bookgenre}'`, (err, result) => {
 		if (!err) {
 			res.send(result.rows);
 		}
@@ -35,7 +35,7 @@ app.get('/book/genre/:bookgenre', (req, res) => {
 			res.send(err);
 		}
 	});
-	client.end;
+	pool.end;
 })
 
 app.listen(3000, () => {
