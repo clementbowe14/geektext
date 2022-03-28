@@ -9,6 +9,7 @@ CREATE TABLE "User"
 
 CREATE TABLE CreditCard (
     card_id SERIAL PRIMARY KEY,
+    card_holder_name VARCHAR(40),
     card_number VARCHAR(16),
     expiration_date VARCHAR(5),
 	card_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE

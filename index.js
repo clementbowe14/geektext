@@ -1,6 +1,8 @@
 const express = require("express");
-const routes = require("./src/routes");
+const wishListRoutes = require("./src/wishlist/routes");
+const profileRoutes = require("./src/user/routes");
 const { user } = require("pg/lib/defaults");
+
 const app = express();
 const pool = require("./db");
 
@@ -8,7 +10,9 @@ const pool = require("./db");
 
 app.use(express.json()); // req.body
 
-app.use("/", routes);
+app.use("/", wishListRoutes);
+app.use("/user", profileRoutes);
+
 
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
