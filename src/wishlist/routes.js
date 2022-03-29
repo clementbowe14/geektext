@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   res.send("Hello world !");
 });
 
-router.get("/user/:userid/wishlist/:wishname", controller.getBooks);
+router.get("/user/:userid/wishlist/:wishname", controller.getBooksFromWishlist);
 router.post("/user/:userid/wishlist/:wishname", controller.addToWishlist);
 router.get("/user/:userid/wishlist", controller.getWishLists);
 router.post("/user/:userid/wishlist", controller.addEmptyWishlist);
