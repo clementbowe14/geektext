@@ -42,13 +42,22 @@ CREATE TABLE Wishlist (
     ISBN INT REFERENCES Book(ISBN)
 );
 
-CREATE TABLE ReviewedBooks(
+CREATE TABLE Reviews(
     review_id SERIAL PRIMARY KEY,
     rating_score integer,
     date_stamp date,
     review_text VARCHAR,
- 	review_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE,
-	review_ISBN Serial REFERENCES Book(ISBN) ON DELETE CASCADE
+    review_user int, 
+    review_ISBN int,
+    FOREIGN KEY (review_user) REFERENCES "User" (user_id),
+    FOREIGN KEY (review_ISBN) REFERENCES Book (ISBN)
+);
+
+CREATE TABLE PurchasedBook(
+    purchashed_id SERIAL PRIMARY KEY,
+    purchased_user_id Serial REFERENCES "User"(user_id) ON DELETE CASCADE,
+    purchased_book Serial REFERENCES Book(ISBN) ON DELETE CASCADE
+
 );
 
 CREATE TABLE ShoppingCart (
