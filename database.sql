@@ -44,7 +44,7 @@ CREATE TABLE Wishlist (
 
 CREATE TABLE Reviews(
     review_id SERIAL PRIMARY KEY,
-    rating_score integer,
+    rating_score integer CHECK (rating_score BETWEEN 1 AND 5),
     date_stamp date,
     review_text VARCHAR,
     review_user int, 
