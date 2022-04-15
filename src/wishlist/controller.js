@@ -1,10 +1,10 @@
 const pool = require("../../db");
 const queries = require("./queries");
 
-const getBooks = (req, res) => {
+const getBooksFromWishlist = (req, res) => {
   const id = req.params.userid;
   const name = req.params.wishname;
-  pool.query(queries.getBooks, [id, name], (err, result) => {
+  pool.query(queries.getBooksFromWishlist, [id, name], (err, result) => {
     if (!err) {
       res.send(result.rows);
     }
@@ -85,7 +85,7 @@ const addEmptyWishlist = (req, res) => {
           res.send("You already have 3 wishlists!");
         }
       } else {
-        res.send("A wishlist with that name already exists!")
+        res.send("A wishlist with that name already exists!");
       }
     };
   }
@@ -103,22 +103,52 @@ const addToWishlist = (req, res) => {
       if (!err) {
         res.send("Successfully deleted " + book + " from your wishlist!");
       } else {
-        res.send("Something went wrong while deleting your book. Please try again later")
+        res.send("Something went wrong while deleting your book. Please try again later");
       }
     });
+  } else if (req.body.move === true && req.body.quantity !== undefined) {
+    pool.query(queries.getBookPrice, [book], (err, result) => {
+      if (!err) {
+        moveBookToShoppingCart(result.rows[0].bookprice);
+      } else {
+        res.send("Something went wrong while fetching book details. Please try again later");
+      }
+    });
+
+    var moveBookToShoppingCart = function (price) {
+      pool.query(queries.moveBookToShoppingCart, [id, book, req.body.quantity, price], (err, result) => {
+        if (!err) {
+          deleteBookFromWishlist();
+        } else {
+          res.send("Something went wrong while moving book to shopping cart. Please try again later");
+        }
+      });
+    };
+
+    var deleteBookFromWishlist = function () {
+      pool.query(queries.delFromWishlist, [id, name, book], (err, result) => {
+        if (!err) {
+          res.send("Successfully moved " + book + " to your shopping cart!");
+        } else {
+          res.send("Something went wrong while deleting book from your wishlist, however the book was successfully moved to your shopping cart.");
+        }
+      });
+    };
+  } else if (req.body.move === true && req.body.quantity === undefined) {
+    res.send("Please add quantity");
   } else {
     pool.query(queries.addToWishlist, [name,id,book], (err, result) => {
       if (!err) {
         res.send("Successfully added " + book + " to your wishlist!");
       } else {
-        res.send("Something went wrong while adding your book. Please try again later")
+        res.send("Something went wrong while adding your book. Please try again later");
       }
     });
   }
 };
 
 module.exports = {
-  getBooks,
+  getBooksFromWishlist,
   addEmptyWishlist,
   getWishLists,
   addToWishlist,

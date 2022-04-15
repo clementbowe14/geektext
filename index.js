@@ -4,6 +4,8 @@ const profileRoutes = require("./src/user/routes");
 const reviewsRoutes = require("./src/reviews/routes");
 const authorRoutes = require("./src/Author/routes");
 const bookRoutes = require("./src/Book/routes");
+const bookSearchRoutes = require('./src/booksearch/routes.js');
+const SCroutes = require('./src/ShoppingCart/routes');
 const { user } = require("pg/lib/defaults");
 
 const app = express();
@@ -16,14 +18,9 @@ app.use(express.json()); // req.body
 app.use("/", wishListRoutes);
 app.use("/reviews", reviewsRoutes);
 app.use("/user", profileRoutes);
-app.use("/author", authorRoutes);
-app.use("/book", bookRoutes);
-app.use("/api/v1/authors", authorRoutes);
-app.use("/api/v1/book", bookRoutes);
+app.use("/book", bookSearchRoutes);
+app.use("/ShoppingCart", SCroutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-})
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
 });
