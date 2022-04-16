@@ -2,9 +2,10 @@ const express = require("express");
 const wishListRoutes = require("./src/wishlist/routes");
 const profileRoutes = require("./src/user/routes");
 const reviewsRoutes = require("./src/reviews/routes");
+const authorRoutes = require("./src/Author/routes");
+const bookRoutes = require("./src/Book/routes");
 const bookSearchRoutes = require('./src/booksearch/routes.js');
 const SCroutes = require('./src/ShoppingCart/routes');
-
 const { user } = require("pg/lib/defaults");
 
 const app = express();
@@ -25,3 +26,4 @@ app.listen(3000, () => {
 });
 
 pool.connect();
+
